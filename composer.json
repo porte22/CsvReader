@@ -1,0 +1,17 @@
+{
+    "name": "porte22/csvimporter",
+    "description": "import csv leads file",
+    "type": "project",
+    "authors": [
+        {
+            "name": "Alessandro Conti",
+            "email": "porte22@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Porte22\\Csvimporter\\": "src/"
+        }
+    },	
+    "require": {}
+}
