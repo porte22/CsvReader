@@ -11,9 +11,9 @@ class CsvImporter
     private $bomDefinition;
     private $bomSequence;
 
-    public function __construct(\SplFileObject $file)
+    public function __construct()
     {
-        $this->file = $file;
+        //$this->file = $file;
     }
 
     public function getRawFile()
@@ -42,8 +42,9 @@ class CsvImporter
         return preg_replace("/^".pack('H*', 'EFBBBF')."/", '', $text);
     }
 
-    public function read()
+    public function read(\SplFileObject $file)
     {
+        $this->file = $file;
         $reader = new BOMReader($this->file);
 
         $fileConverted = mb_convert_encoding($this->getRawFile(), "UTF-8", $reader->getEncoding());
