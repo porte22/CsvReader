@@ -47,10 +47,13 @@ class CsvImporter
         $this->file = $file;
         $reader = new BOMReader($this->file);
 
-        $fileConverted = mb_convert_encoding($this->getRawFile(), "UTF-8", $reader->getEncoding());
-
-        $newFile = sys_get_temp_dir() . DIRECTORY_SEPARATOR . uniqid('.txt');
-        file_put_contents($newFile, $this->removeBom($fileConverted));
+        if ($reader->getEncoding() != '') {
+            $fileConverted = mb_convert_encoding($this->getRawFile(), "UTF-8", $reader->getEncoding());
+            $newFile = sys_get_temp_dir() . DIRECTORY_SEPARATOR . uniqid('.txt');
+            file_put_contents($newFile, $this->removeBom($fileConverted));
+        } else {
+            $newFile = $this->file->getPathname();
+        }
 
         $row = 1;
         if (($handle = fopen($newFile, "r")) !== false) {
